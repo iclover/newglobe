@@ -7,6 +7,6 @@
  <title>登录错误</title>
  </head>  
  <body>  
-    Login Error!
+    <h1>${message}</h1>
  </body>  
  </html>  

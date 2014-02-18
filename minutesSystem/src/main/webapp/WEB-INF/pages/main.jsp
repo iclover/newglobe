@@ -4,9 +4,9 @@
  <html>  
  <head>  
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
- <title>登录成功</title>
+ <title>主页</title>
  </head>  
- <body>  
-    Login Successfully!
+ <body>
+    登录成功
  </body>  
  </html>  
