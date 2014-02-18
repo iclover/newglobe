@@ -21,11 +21,15 @@ public class UserInfoServiceImpl implements IUserInfoService {
         UserInfoCriteria example = new UserInfoCriteria();
         example.createCriteria().andIsValidEqualTo("1").andUserNameEqualTo(loginName);
         List<UserInfo> userInfoList = userInfoMapper.selectByExample(example);
-        return userInfoList.get(0);
+        UserInfo userinfo = new UserInfo();
+        if( null != userInfoList && userInfoList.size() > 0){
+            userinfo =  userInfoList.get(0);
+        }
+        return userinfo;
     }
 
     @Override
-    public Integer login(UserInfo userInfo, String ipAddress) throws Exception {
+    public Integer login(UserInfo userInfo) throws Exception {
         return null;
     }
 

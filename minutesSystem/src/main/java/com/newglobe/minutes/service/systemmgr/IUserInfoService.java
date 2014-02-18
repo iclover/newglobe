@@ -11,7 +11,7 @@ public interface IUserInfoService {
 	 * @return 1:没有该用户 2：用户密码错误 3:用户状态冻结或离职 0：登陆成功
 	 * @throws Exception
 	 */
-	public Integer login(UserInfo userInfo, final String ipAddress) throws Exception;
+	public Integer login(UserInfo userInfo) throws Exception;
 
 	/**
 	 * 新增系统用户：1成功 2：名称重复
