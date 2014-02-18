@@ -6,8 +6,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -41,4 +45,21 @@ public class UserController {
         }
         return "loginError";
     }
+
+    /**
+     * 登录表单后台Ajax验证
+     * @param bean
+     * @param result
+     * @return
+     */
+    @RequestMapping(params = "method=validate")
+    public @ResponseBody
+    String validate(@Valid UserForm bean, BindingResult result) {
+        if (result.hasErrors()) {
+            return "0";
+        } else {
+            return "1";
+        }
+    }
+
 }
