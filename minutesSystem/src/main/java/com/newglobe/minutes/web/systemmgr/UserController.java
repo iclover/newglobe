@@ -18,33 +18,27 @@ public class UserController {
     @Autowired
     private IUserInfoService userInfoService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-        // 如果不加任何参数，则在请求/sysuser时，便默认执行该方法
-		model.addAttribute("message", "Hello world!");
-		return "hello";
-	}
-
     @RequestMapping(params = "method=login", method=RequestMethod.POST)
-    public String login(String username, String password) {
+    public String login(String username, String password,ModelMap model) {
         // 依据params的参数method的值来区分不同的调用方法
         // 可以指定页面请求方式的类型，默认为get请求
-
         try {
-            UserInfo userinfo = userInfoService.getUser("admin");
+            UserInfo userinfo = userInfoService.getUser(username);
             if( null != userinfo){
                logger.debug("get userinfo by username succcess  "+userinfo.getUserPassword());
+               if(password.equals(userinfo.getUserPassword())){
+                   return "main";
+               }else {
+                   model.addAttribute("message", "用户密码不正确!");
+               }
             } else {
                logger.debug("get userinfo by username fail  ");
+                model.addAttribute("message", "用户不存在!");
             }
         } catch (Exception e) {
             logger.error("get userinfo by username error"+ e.getMessage(),e);
-            return "loginError";
+            model.addAttribute("message", "登录失败");
         }
-
-//        if (!"admin".equals(username) || !"admin".equals(password)) {
-//            return "loginError";
-//        }
-        return "loginSuccess";
+        return "loginError";
     }
 }
