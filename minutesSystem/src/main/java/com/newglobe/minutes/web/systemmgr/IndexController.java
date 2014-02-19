@@ -1,9 +1,6 @@
 package com.newglobe.minutes.web.systemmgr;
 
-import com.newglobe.minutes.model.systemmgr.UserInfo;
-import com.newglobe.minutes.service.systemmgr.IUserInfoService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +15,7 @@ public class IndexController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String welcomePage(ModelMap model) {
         // 如果不加任何参数，则在请求/时，便默认执行该方法
+        logger.info("进入登录页面");
         model.addAttribute("message", "Hello world!");
 		return "login";
 	}

@@ -28,16 +28,18 @@ public class UserController {
         // 可以指定页面请求方式的类型，默认为get请求
         try {
             UserInfo userinfo = userInfoService.getUser(username);
-            if( null != userinfo){
+            if( null != userinfo ){
                logger.debug("get userinfo by username succcess  "+userinfo.getUserPassword());
-               if(password.equals(userinfo.getUserPassword())){
-                   return "main";
-               }else {
-                   model.addAttribute("message", "用户密码不正确!");
-               }
-            } else {
-               logger.debug("get userinfo by username fail  ");
-                model.addAttribute("message", "用户不存在!");
+                if( null != userinfo.getUserName() && !"".equals(userinfo.getUserName())){
+                    if(password.equals(userinfo.getUserPassword())){
+                        return "main";
+                    }else {
+                        model.addAttribute("message", "用户密码不正确!");
+                    }
+                }else {
+                    logger.debug("get userinfo by username fail  ");
+                    model.addAttribute("message", "用户不存在!");
+                }
             }
         } catch (Exception e) {
             logger.error("get userinfo by username error"+ e.getMessage(),e);
